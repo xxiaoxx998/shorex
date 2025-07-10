@@ -18,8 +18,8 @@ def get_six_digits():
 
 def generate_checkin_code(six_digits):
     """生成完整的签到码"""
-    base_number = "2024302181080"
-    suffix = "303"
+    base_number = "id"
+    suffix = "roomnumber"
     raw_code = base_number + six_digits + suffix
     md5_hash = hashlib.md5(raw_code.encode("utf-8"))
     return md5_hash.hexdigest()
@@ -28,7 +28,7 @@ def generate_checkin_code(six_digits):
 def save_to_file(checkin_code, six_digits):
     """将签到码保存到固定目录"""
     today = datetime.date.today().strftime("%Y-%m-%d")
-    save_path = r"D:\git\303"  # 固定保存路径
+    save_path = r"git-command-path"  # 固定保存路径
 
     # 确保目录存在
     os.makedirs(save_path, exist_ok=True)
@@ -47,7 +47,7 @@ def save_to_file(checkin_code, six_digits):
         return None
 
 
-def execute_git_commands(file_path, branch_name="2024302181080xiaoyuzheng"):
+def execute_git_commands(file_path, branch_name="yourbranch"):
     """执行Git命令提交签到码"""
     if not file_path:
         print("没有文件可提交")
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     six_digits = get_six_digits()
     checkin_code = generate_checkin_code(six_digits)
 
-    print(f"\n原始字符串: 2024302181080 + {six_digits} + 303")
+    print(f"\n原始字符串: id + {six_digits} + roomnumber")
     print(f"MD5 签到码: {checkin_code}")
 
     # 保存到文件
